@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>Code Review</title>
+</head>
+
+<body class="p-3 mb-2 bg-info text-white">
+    <div class="jumbotron">
+        <!-- <img class="priyam" src="/static/Cr-logo.png" alt=""> -->
+        <div class="container">
+            <h1>Code Review</h1>
+            <p>Want some review on you code so here we comes with an idea.</br>Just paste your code and get reviews.</p>
+        </div>
+    </div>
+
+    <!-- For code input -->
+    <div class="content">
+        <form action="/" method="POST">
+            <div>
+                <datalist id="suggestions">
+                    <option>c</option>
+                    <option>cpp</option>
+                    <option>csharp</option>
+                    <option>python</option>
+                </datalist>
+                Enter Programming Language: <input autoComplete="on" name="lang" required list="suggestions"
+                    class="lang" />
+            </div>
+            <div class="form-group">
+                <label for="code"></label>
+                <textarea class="form-control" id="code" rows="10" name="code"
+                    placeholder="Paste Valid Code"></textarea>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success" aria-haspopup="true" aria-expanded="false">
+                    Submit
+                </button>
+            </div>
+        </form action="/" method="POST">
+
+    </div>
+</body>
+
+</html>

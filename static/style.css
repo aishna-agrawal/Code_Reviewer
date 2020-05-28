@@ -1,0 +1,35 @@
+
+.jumbotron{
+    /* background: transparent; */
+    color: black;
+    width: 90%;
+    margin: auto;
+    /* padding: 60px 10px; */
+    padding-top: 34px;
+}
+.container{
+    max-height: 100px;
+    background: transparent;
+    display: inline-block;
+    margin: 0px 150px;
+}
+.container p{
+    font-size:x-large;
+}
+
+.content{
+    background-color: #e9ecef;
+    border-radius: .3rem;
+    margin: 30px 10%;
+    color: black;
+    padding: 20px;
+}
+
+.lang{
+    border-radius: 1px;
+}
+
+.priyam{
+    max-width: 50px;
+    display: inline-block;
+}

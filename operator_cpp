@@ -1,0 +1,133 @@
+(
+{
+[
+}
+]
+)
+"
+'
+->*
+.*
+::
+&=
+&&
+|=
+||
+^=
+!=
+->
+>>
+>=
+<<
+<=
+==
+++
++=
+/=
+//
+*=
+--
+-=
+%=
+.
+;
+,
+?
+:
+&
+|
+^
+~
+!
+>
+<
++
+/
+*
+-
+%
+=
+#include
+#define 
+unsigned long long int 
+unsigned short int 
+unsigned long int 
+reinterpret_cast 
+signed short int 
+signed long int 
+long long int 
+unsigned char 
+dynamic_cast 
+unsigned int 
+long double 
+static_cast 
+signed char 
+const_cast 
+signed int 
+push_back 
+namespace 
+protected 
+short int 
+pop_back 
+explicit 
+operator 
+typename 
+register 
+continue 
+template 
+unsigned 
+volatile 
+long int  
+private	
+mutable 
+default	
+virtual 
+wchar_t 
+typedef 
+double 
+friend 
+inline 
+public 
+delete 
+typeid 
+extern 
+return 
+signed 
+sizeof 
+static 
+struct 
+switch 
+string
+empty
+float 
+catch 
+false 
+class 
+using 
+break 
+const 
+short 
+throw 
+union 
+while 
+size 
+push 
+bool 
+else 
+long 
+case 
+enum 
+char 
+goto 
+this 
+true 
+auto 
+void 
+pop 
+asm 
+new	
+try 
+int 
+for 
+do 
+if 

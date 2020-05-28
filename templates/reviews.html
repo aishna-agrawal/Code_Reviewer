@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- YouTube Link:https://www.youtube.com/watch?v=1op-PqCGdIA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}"> -->
+    <link rel="stylesheet" href="/static/style.css">
+
+    <title>Code Review</title>
+</head>
+<body class="p-3 mb-2 bg-info text-white">
+    <!-- <div class="jumbotron">
+        <div class="container">
+            <h1>Your Review</h1>
+        </div>
+    </div> -->
+    
+    <!-- For code input -->
+    <div class="content">
+        <div class="btn-group">
+            <a href="/">
+                <button type="submit" class="btn btn-success" aria-haspopup="true" aria-expanded="false">
+                    Back
+                </button>
+            </a>
+        </div>
+        <h2>Result</h2>
+        <ul>
+            {% for i in res%}
+            <li>{{i}} : {{res[i]}}</li>
+            {% endfor %}
+        </ul>
+            <h2>Your Code</h2>
+        <pre class="prettyprint lang-{{lang}}">{{code}}</pre>
+    </div>
+
+</body>
+
+</html>

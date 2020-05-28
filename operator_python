@@ -1,0 +1,130 @@
+.
+(
+[
+{
+}
+]
+)
+"
+'
++=
++
+-=
+-
+**=
+*=
+**
+*
+//=
+/=
+//
+/
+==
+!=
+=
+%%
+%=
+%
+<>
+<<=
+<<
+<=
+<
+>>=
+>>
+>=
+>
+,
+:
+^=
+^
+&=
+&
+|=
+|
+~
+ symmetric_difference_update 
+ symmetric_difference 
+ intersection_update 
+ difference_update 
+ intersection 
+ difference 
+ isdisjoint 
+ issuperset 
+ setdefault 
+ Conversion 
+ issubset 
+ fromkeys 
+ KeyError 
+ popitem 
+ discard 
+ reverse 
+ not in 
+ append 
+ extend 
+ remove 
+ insert 
+ update 
+ values 
+ lambda 
+ is not 
+continue
+import 
+global 
+return 
+ input 
+ float 
+ tuple 
+ range 
+ super 
+ count 
+ index 
+ clear 
+ union 
+ items 
+ split 
+except 
+ False
+class 
+ bool 
+print 
+ type 
+ iter 
+ next 
+ None 
+while 
+ sort 
+ copy 
+ keys 
+ list 
+ dict 
+break 
+ join 
+ True
+self 
+elif 
+from 
+else 
+pass 
+ and 
+ abs 
+ pop 
+ str 
+ set 
+ not 
+ int 
+ len 
+ get 
+ add 
+ map 
+for 
+del 
+def 
+try 
+ in 
+ or 
+ id 
+ as 
+ is 
+do 
+if 
