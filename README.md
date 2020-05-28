@@ -1,4 +1,4 @@
-# Code_reviewer #
+# Code Reviewer #
 ## STEPS: ##
 
 1.Create a virtual environment <code> $ py -m venv env </code> and activate it by <code> $ .\env\Scripts\activate </code> <br/>
