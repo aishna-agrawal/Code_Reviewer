@@ -7,11 +7,11 @@ Change in app.py to the csv file in which output should be taken.
 flask run
 Requirements for running the code- all can be installed using pip
 
-1.flask
-2.sklearn
-3.lizard
-4.numpy
-5.pandas
+1.flask <br>
+2.sklearn <br>
+3.lizard <br>
+4.numpy <br>
+5.pandas <br>
 
 Code is divided into 3 parts-
 
