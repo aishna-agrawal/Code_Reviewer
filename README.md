@@ -4,7 +4,7 @@
 1.Create a virtual environment <code> $ py -m venv env </code> and activate it by <code> $ .\env\Scripts\activate </code> <br/>
 2.In the environment install the following libraries(flask, scikit-learn, lizard, numpy, pandas). <br/>
 3.Change in app.py to the csv file in which output should be taken.<br/>
-4.flask run<br/>
+4.Run<code>$ python app.py</code><br/>
 - - - -
 ## Requirements for running the code- all can be installed using pip ##
 
