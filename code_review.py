@@ -4,66 +4,33 @@ import re
 from math import log2
 import lizard
 
-def ccn(code,lang):
+def ccn(code,lang,val):
+    lst={}
+    names=[]
+    extension="zz"
     if(lang=="python"):
-        i = lizard.analyze_file.analyze_source_code("zz.py",code)
-        a = (len(i.function_list))
-        z = i.function_list
-        max =0
-        for j in range(a):
-            if(z[j].__dict__['cyclomatic_complexity']>max):
-                max = z[j].__dict__['cyclomatic_complexity']
-        return max
+        extension+=".py"
     elif(lang=="csharp"):
-        i = lizard.analyze_file.analyze_source_code("zz.cs",code)
-        a = (len(i.function_list))
-        z = i.function_list
-        max =0
-        for j in range(a):
-            if(z[j].__dict__['cyclomatic_complexity']>max):
-                max = z[j].__dict__['cyclomatic_complexity']
-        return max
-    elif(lang=="cpp"):
-        i = lizard.analyze_file.analyze_source_code("zz.cpp",code)
-        a = (len(i.function_list))
-        z = i.function_list
-        max =0
-        for j in range(a):
-            if(z[j].__dict__['cyclomatic_complexity']>max):
-                max = z[j].__dict__['cyclomatic_complexity']
-        return max
+        extension+=".cs"
     elif(lang=="c"):
-        i = lizard.analyze_file.analyze_source_code("zz.c",code)
-        a = (len(i.function_list))
-        z = i.function_list
-        max =0
-        for j in range(a):
-            if(z[j].__dict__['cyclomatic_complexity']>max):
-                max = z[j].__dict__['cyclomatic_complexity']
-        return max       
-
-def removemulticomments(code, lang):
-    z = code
-    if(lang=='python'):
-        a = [x.start() for x in re.finditer(r"\"\"\"", code)]
-        for i in range(0,len(a),2):
-            #print(code[a[i]:a[i+1]+3])
-            z = z.replace(code[a[i]:a[i+1]+3],"")
-        t=z
-        b = [x.start() for x in re.finditer(r"\'\'\'", t)]
-        for i in range(0,len(b),2):
-            # print(code[a[i]:b[i]+2])
-            t = t.replace(z[b[i]:b[i+1]+3],"")
-        code=t
-    else:
-        a = [x.start() for x in re.finditer(r"/\*", code)]
-        b = [x.start() for x in re.finditer(r"\*/", code)]
+        extension+=".c"
+    elif(lang=="javascript"):
+        extension+=".js"
+    elif(lang=="typescript"):
+        extension+=".ts"
+    elif(lang=="cpp"):
+        extension+=".cpp"
         
-        for i in range(len(a)):
-            # print(code[a[i]:b[i]+2])
-            z = z.replace(code[a[i]:b[i]+2],"")
-        code=z
-    return code
+    i = lizard.analyze_file.analyze_source_code(extension,code)
+    a = (len(i.function_list))
+    z = i.function_list
+    for j in range(a):
+        lst[z[j].__dict__['name']]=z[j].__dict__['cyclomatic_complexity']
+        names.append(z[j].__dict__['name'])
+    val['CyclomaticComplexity']=lst
+    val['FuncNames']=names
+    return
+
 
 def removeComments(line,lang):
     if(lang=="python"):
@@ -71,6 +38,15 @@ def removeComments(line,lang):
         if (re.search(pattern, line)):
             s = line.index("#")
             line = line[:s]
+        z = line
+        a = [x.start() for x in re.finditer(r"\"\"\"", line)]
+        for i in range(0,len(a),2):
+            z = z.replace(line[a[i]:a[i+1]+3],"")
+        t=z
+        b = [x.start() for x in re.finditer(r"\'\'\'", t)]
+        for i in range(0,len(b),2):
+            t = t.replace(z[b[i]:b[i+1]+3],"")
+        line=t
         return line
     else:
         pattern = r""" //.*?$ | /\*[^*]*\*+([^/*][^*]*\*+)*/|("(\\.|[^"\\])*"|'(\\.|[^'\\])*'|.[^/"'\\]*) """
@@ -84,7 +60,8 @@ def codeparams(code,lang):
     # print("operator filename:"+operatorsFileName)
     q=code
     # Calculate CCN
-    cyclomatic_n = ccn(q,lang) 
+    val={}
+    ccn(q,lang,val) 
     # print("ccn:",cyclomatic_n)
 
     operators = {}
@@ -94,17 +71,15 @@ def codeparams(code,lang):
         for op in f:
             operators[op.replace('\n','')] = 0
 
-    code = removemulticomments(code,lang)
-
+    code = removeComments(code,lang)
     t=code.split("\n")
+    # print(t)
     for line in t:
-        line = removeComments(line,lang)
         line = line.strip("\n").strip(' ')
-
+        # print(line)
         if(line!=""):
             if(lang == "c" or lang == "cpp"):
                 pattern = re.compile("\#include\s*<.*>")
-                # mas = pattern.finditer(line)
                 if(re.search(pattern,line)):
                     s = line.index("<")+1
                     e = line.index(">")
@@ -163,6 +138,11 @@ def codeparams(code,lang):
             l =[]
             for i in range(len(st)):
                 if(st[i]=='"' or st[i]=="'"):
+                    key = st[i]
+                    if(key in operators):
+                        operators[key] +=1 
+                    else:
+                        operators[key]=1
                     l.append(i)
             if(len(l)!=0):
                 s += st[0:l[0]]
@@ -188,7 +168,10 @@ def codeparams(code,lang):
                     operands[key] = operands[key] + 1
                 else:
                     operands[key] = 1
-    
+
+    operators['"']=operators['"']//2
+    operators["'"]=operators["'"]//2
+        
     n1, N1, n2, N2 = 0, 0, 0, 0
     # print("OPERATORS:\n")
     for key in operators:
@@ -196,32 +179,43 @@ def codeparams(code,lang):
             if(key not in ")}]"):
                 n1, N1 = n1 + 1, N1 + operators[key]
                 # print("{} = {}".format(key, operators[key]))
-        
+
     # print("\nOPERANDS\n")
     for key in operands.keys():
         if(operands[key] > 0):
             n2, N2 = n2 + 1, N2 + operands[key]
             # print("{} = {}".format(key, operands[key]))
     if(n1==0):
-        return (-1)
-    else:
-        val={}
-        val['Cyclomatic Complexity']=cyclomatic_n
-        val['Vocabulary']= n1 + n2
-        val['Volume']= (N1 + N2) * log2(n1 + n2) 
-        val['Program Length']= (N1 + N2)
-        val['Difficulty']= (n1 * N2) / (2 * n2)
-        val['Intelligence Count'] = val['Volume'] / val['Difficulty']
-        val['Effort'] = val['Difficulty'] * val['Volume']
-        val['Time'] = val['Effort'] / (18)
-        val['Unique Operators']=n1
-        val['Unique Operands']=n2
-        val['Total Opeartors']=N1
-        val['Total Operands']=N2
+        val['CyclomaticComplexity']=-1
+        val['Vocabulary']= -1
+        val['volume']= -1 
+        val['length']= -1
+        val['difficulty']= -1
+        val['IntelligenceCount'] = -1
+        val['effort'] = -1
+        val['time'] = -1
+        val['UniqueOperators']=-1
+        val['UniqueOperands']=-1
+        val['TotalOperators']=-1
+        val['TotalOperands']=-1
+        return val
 
+    else:
+        # val['CyclomaticComplexity']=cyclomatic_n
+        val['Vocabulary']= n1 + n2
+        val['volume']= (N1 + N2) * log2(n1 + n2) 
+        val['length']= (N1 + N2)
+        val['difficulty']= (n1 * N2) / (2 * n2)
+        val['IntelligenceCount'] = val['volume'] / val['difficulty']
+        val['effort'] = val['difficulty'] * val['volume']
+        val['time'] = val['effort'] / (18)
+        val['UniqueOperators']=n1
+        val['UniqueOperands']=n2
+        val['TotalOperators']=N1
+        val['TotalOperands']=N2
         return val
 
 def main(code,lang):
-
     lst = codeparams(code,lang)
+    # print(lst)
     return lst
