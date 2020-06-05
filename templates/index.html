@@ -25,13 +25,15 @@
 
     <!-- For code input -->
     <div class="content">
-        <form action="/" method="POST">
+        <form action="/getCode" method="POST">
             <div>
                 <datalist id="suggestions">
                     <option>c</option>
                     <option>cpp</option>
                     <option>csharp</option>
                     <option>python</option>
+                    <option>javascript</option>
+                    <option>typescript</option>
                 </datalist>
                 Enter Programming Language: <input autoComplete="on" name="lang" required list="suggestions"
                     class="lang" />
@@ -46,7 +48,7 @@
                     Submit
                 </button>
             </div>
-        </form action="/" method="POST">
+        </form>
 
     </div>
 </body>
