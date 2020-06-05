@@ -14,18 +14,15 @@ def index():
         lang = req.get("lang")
         code = req.get("code")
         features = main(code,lang)
-        if(features==-1):
-            result={"Note":"Enter a valid code!"}
-        else:
-            CSV_filename = "<Filename>"  #Filename of the CSV file which should include outputs.
-            lst= list(features.values())
-            q = arr_input(lst)
-            lst.append(q[0])
-            #features['result']=q[0]  #Uncomment for adding result in tht output.
-            result=features
-            with open(CSV_filename, 'a+', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(lst)
+        CSV_filename = "<Filename>"  #Filename of the CSV file which should include outputs.
+        lst= list(features.values())
+        q = arr_input(lst)
+        lst.append(int(q[0]))
+        #features['result']=int(q[0])  #Uncomment for adding result in tht output.
+        result=features
+        with open(CSV_filename, 'a+', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(lst)
         return render_template("reviews.html", lang =lang, code = code,res = result)
 
     return render_template("index.html")
