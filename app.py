@@ -20,6 +20,7 @@ def getCode():
     result = features
     CSV_filename = "A.csv"  #Filename of the CSV file which should include outputs.
     lst= list(features.values())
+    lst.pop(1)
     q = arr_input(lst)
     lst.append(int(q[0]))
     features['Result']=int(q[0])  #Uncomment for adding result in tht output.
