@@ -24,10 +24,12 @@ def ccn(code,lang,val):
     i = lizard.analyze_file.analyze_source_code(extension,code)
     a = (len(i.function_list))
     z = i.function_list
+    max=0
     for j in range(a):
-        lst[z[j].__dict__['name']]=z[j].__dict__['cyclomatic_complexity']
-        names.append(z[j].__dict__['name'])
-    val['CyclomaticComplexity']=lst
+            if(z[j].__dict__['cyclomatic_complexity']>max):
+                max = z[j].__dict__['cyclomatic_complexity']
+            names.append(z[j].__dict__['name'])
+    val['CyclomaticComplexity']=max
     val['FuncNames']=names
     return
 
